@@ -16,3 +16,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/hello', function () {
+    return "Hello World";
+});
+
+Route::redirect('/world', '/hello');
+
+Route::fallback(function () {
+    return "Ups, sepertinya terjadi kesalahan. Silahkan hubungi Developer.";
+});
