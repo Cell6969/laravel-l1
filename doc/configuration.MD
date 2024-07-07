@@ -47,3 +47,14 @@ class ConfigurationTest extends TestCase
 }
 ```
 
+Untuk melakukan cache pada config, maka bisa menggunakan command:
+```
+php artisan config:cache
+```
+
+By default, laravel akan membaca cache terlebih dahulu baru config file, oleh karenanya perlu di clear ketika terdapat perubahan pada config.
+
+```
+php artisan config:clear
+```
+
