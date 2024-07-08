@@ -26,3 +26,15 @@ Route::redirect('/world', '/hello');
 Route::fallback(function () {
     return "Ups, sepertinya terjadi kesalahan. Silahkan hubungi Developer.";
 });
+
+Route::get('/helloworld', function () {
+    return view('hello', [
+        'name' => 'jonathan'
+    ]);
+});
+
+Route::get('/hello-world', function () {
+    return view('hello.world', [
+        'name' => 'jon'
+    ]);
+});
