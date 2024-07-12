@@ -8,4 +8,9 @@ class HelloServiceIndonesia implements HelloService
     {
         return "Hello $name";
     }
+
+    public function hello2(string $firstname, string $lastname): string
+    {
+        return "Hello $firstname $lastname";
+    }
 }

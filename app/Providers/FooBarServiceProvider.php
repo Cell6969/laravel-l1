@@ -21,7 +21,6 @@ class FooBarServiceProvider extends ServiceProvider implements DeferrableProvide
      */
     public function register()
     {
-        echo "Foo bar service provider";
         $this->app->singleton(Foo::class, function ($app) {
             return new Foo();
         });
