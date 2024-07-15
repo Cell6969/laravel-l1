@@ -58,7 +58,7 @@ public function redirectAction(): RedirectResponse
 Pada code controller diatas, akan meredirect ke controller lain (route lain) tanpa menyebut nama routenya.
 
 ## Redirect to External Domain
-Untuk redirect dengan domain yang berbeda maka harus menyebut full domainnya baru pathnya. Contoh:
+Untuk redirect dengan domain yang berbeda maka harus menyebut full domainnya baru pathnya, lalu untuk function harus men Contoh:
 ```php
 public function redirectAway(): RedirectResponse
 {
