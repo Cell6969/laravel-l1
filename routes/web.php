@@ -92,13 +92,17 @@ Route::post('/file/upload', [FileController::class, 'upload'])
 Route::get('/response/hello', [ResponseController::class, 'response']);
 Route::get('/response/header', [ResponseController::class, 'header']);
 
-Route::get('/response/type/view', [ResponseController::class, 'responseView']);
-Route::get('/response/type/json', [ResponseController::class, 'responseJson']);
-Route::get('/response/type/file', [ResponseController::class, 'responseFile']);
+Route::prefix('/response/type')->group(function () {
+    Route::get('/view', [ResponseController::class, 'responseView']);
+    Route::get('/json', [ResponseController::class, 'responseJson']);
+    Route::get('/file', [ResponseController::class, 'responseFile']);
+});
 
-Route::get('/cookie/set', [CookieController::class, 'createCookie']);
-Route::get('/cookie/get', [CookieController::class, 'getCookie']);
-Route::get('/cookie/clear', [CookieController::class, 'clearCookie']);
+Route::controller(CookieController::class)->group(function () {
+    Route::get('/cookie/set', 'createCookie');
+    Route::get('/cookie/get', 'getCookie');
+    Route::get('/cookie/clear', 'clearCookie');
+});
 
 Route::get('/redirect/from', [RedirectController::class, 'redirectFrom']);
 Route::get('/redirect/to', [RedirectController::class, 'redirectTo']);
@@ -107,14 +111,15 @@ Route::get('/redirect/name/{name}', [RedirectController::class, 'redirectHello']
     ->name('redirect-hello');
 Route::get('/redirect/action', [RedirectController::class, 'redirectAction']);
 
-Route::get('/middleware/api', function () {
-    return "Ok";
-})->middleware(["contoh:ArV,401"]);
+Route::middleware(['contoh:Arv,401'])->prefix('middleware')->group(function () {
+    Route::get('api', function () {
+        return "Ok";
+    });
 
-Route::get('/middleware/group', function () {
-    return "Group";
-})->middleware(['gc']);
+    Route::get('group', function () {
+        return "Group";
+    });
+});
 
-
-Route::get('/form',[FormController::class,'form']);
-Route::post('/form', [FormController::class,'submitForm']);
+Route::get('/form', [FormController::class, 'form']);
+Route::post('/form', [FormController::class, 'submitForm']);
