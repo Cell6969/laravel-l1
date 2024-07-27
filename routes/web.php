@@ -9,6 +9,7 @@ use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\ResponseController;
 use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -109,6 +110,17 @@ Route::get('/redirect/to', [RedirectController::class, 'redirectTo']);
 Route::get('/redirect/name', [RedirectController::class, 'redirectName']);
 Route::get('/redirect/name/{name}', [RedirectController::class, 'redirectHello'])
     ->name('redirect-hello');
+Route::get('/redirect/named', function () {
+    // Cara Pertama
+    // return route('redirect-hello',['name' => 'jon']);
+
+    // Cara Kedua
+    // return url()->route('redirect-hello', ['name' => 'don']);
+
+    // Cara Ketiga
+    return URL::route('redirect-hello', ['name' => 'don']);
+});
+
 Route::get('/redirect/action', [RedirectController::class, 'redirectAction']);
 
 Route::middleware(['contoh:Arv,401'])->prefix('middleware')->group(function () {
@@ -121,5 +133,20 @@ Route::middleware(['contoh:Arv,401'])->prefix('middleware')->group(function () {
     });
 });
 
+Route::get('/url/action', function () {
+    // Cara Pertama
+    // return action([FormController::class,'form'],[]);
+
+    // Cara Kedua
+    // return url()->action([FormController::class, 'form'],[]);
+
+    // Cara Ketiga
+    return URL::action([FormController::class, 'form'], []);
+});
+
 Route::get('/form', [FormController::class, 'form']);
 Route::post('/form', [FormController::class, 'submitForm']);
+
+Route::get('/url/current', function () {
+    return URL::full();
+});
