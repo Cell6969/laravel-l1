@@ -163,7 +163,16 @@ Route::get('/error/manual', function(){
     report(new Exception('Sample manual'));
     return "OK";
 });
-
 Route::get('/error/validation', function(){
     throw new ValidationException('Validation Error');
+});
+
+Route::get('/abort/400', function(){
+    abort(400, 'ini Contoh error 400');
+});
+Route::get('/abort/401', function(){
+    abort(401);
+});
+Route::get('/abort/500', function(){
+    abort(500);
 });
